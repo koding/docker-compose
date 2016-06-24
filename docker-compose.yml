@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  koding:
+    image: koding/koding
+    command: --version master
+    env_file: .env-docker-compose
+    ports:
+      - "8090:8090"
+    links:
+      - mongo
+      - postgres
+      - redis
+      - rabbitmq
+
+  mongo:
+    image: mongo:2.4
+    command: --noprealloc --nojournal --smallfiles
+
+  rabbitmq:
+    image: rabbitmq:3-management
+
+  postgres:
+    image: koding/postgres:20160824
+
+  redis:
+    image: redis
