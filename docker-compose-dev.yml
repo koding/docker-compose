@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  koding:
+    image: koding/koding:20160921
+    command: --version 20160921
+    env_file: .env-docker-compose
+    ports:
+      - "8090:8090"
+    links:
+      - mongo
+      - postgres
+      - redis
+      - rabbitmq
+    volumes:
+      - .:/opt/koding
+
+  mongo:
+    image: koding/mongo:20160906
+
+  rabbitmq:
+    image: rabbitmq:3-management
+
+  postgres:
+    image: koding/postgres:20160824
+
+  redis:
+    image: redis
